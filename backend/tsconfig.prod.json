@@ -5,8 +5,10 @@
     "lib": ["ES2020"],                        
     "strict": true,
     "baseUrl": "./",
-    "outDir": "temp",
-    "esModuleInterop": true,                 
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",                 
     "skipLibCheck": true,                     
     "forceConsistentCasingInFileNames": true,
     "paths": {

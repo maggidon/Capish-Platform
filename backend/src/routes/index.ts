@@ -1,8 +1,8 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import Paths from "@src/common/constants/Paths";
-import UserRoutes from "./UserRoutes";
-import products from "../products.json";
+import Paths from '@src/common/constants/Paths';
+import UserRoutes from './UserRoutes';
+import products from '../products.json';
 
 /******************************************************************************
                                 Setup
@@ -11,11 +11,11 @@ import products from "../products.json";
 const apiRouter = Router();
 
 // ✅ Health + Products routes (attach to apiRouter)
-apiRouter.get("/healthz", (_req, res) => {
-  res.status(200).send("ok");
+apiRouter.get('/healthz', (_req, res) => {
+  res.status(200).send('ok');
 });
 
-apiRouter.get("/products", (_req, res) => {
+apiRouter.get('/products', (_req, res) => {
   res.json(products);
 });
 

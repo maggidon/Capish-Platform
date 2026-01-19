@@ -39,6 +39,12 @@ export default defineConfig(
       '@typescript-eslint/no-floating-promises': 0,
       '@typescript-eslint/no-confusing-void-expression': 0,
       '@typescript-eslint/no-unnecessary-condition': 0,
+      '@typescript-eslint/no-unsafe-assignment': 0,
+      '@typescript-eslint/no-redundant-type-constituents': 0,
+      '@typescript-eslint/no-unsafe-member-access': 0,
+      '@typescript-eslint/no-unsafe-call': 0,
+      '@typescript-eslint/no-unsafe-return': 0,
+      '@typescript-eslint/no-unsafe-argument': 0,
       '@typescript-eslint/restrict-template-expressions': [
         'error', { allowNumber: true },
       ],

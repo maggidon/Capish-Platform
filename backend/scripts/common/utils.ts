@@ -33,25 +33,18 @@ export function remove(loc: string): Promise<void> {
  * Run command-line command.
  */
 export function exec(cmd: string, loc = './'): Promise<string> {
-  // Setup directory
-  const callingDir = path.dirname(require.main?.filename ?? './'),
-    cwd = path.join(callingDir, loc);
-  // Wrap in promise
-  return new Promise((res, rej) => 
+  // Always run from backend root (one level above /scripts)
+  const projectRoot = path.resolve(__dirname, '..', '..');
+  const cwd = path.resolve(projectRoot, loc);
+
+  return new Promise((res, rej) =>
     childProcess.exec(cmd, { cwd }, (err, stdout, stderr) => {
-      if (!!stdout) {
-        logger.info(stdout);
-      }
-      if (!!stderr) {
-        logger.err(stderr);
-      }
-      if (!!err) {
-        return rej(err);
-      } else if (!!stderr) {
-        return rej(new Error(stderr));
-      } else {
-        return res(stdout);
-      }
+      if (stdout) logger.info(stdout);
+      if (stderr) logger.err(stderr);
+
+      if (err) return rej(err);
+      if (stderr) return rej(new Error(stderr));
+      return res(stdout);
     }),
   );
 }
