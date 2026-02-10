@@ -1,0 +1,34 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    image: capish-platform-backend
+
+    ports:
+      - "3000:3000"
+
+    # Inject env vars into process.env
+    env_file:
+      - ./backend/config/.env.production
+
+    # Make the env file exist where your app reads it
+    volumes:
+      - ./backend/config/.env.production:/app/config/.env.production:ro
+
+    # If the backend crashes, bring it back (like a server would)
+    restart: unless-stopped
+
+    # Healthcheck = prove the API is alive
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/healthz | grep -q ok"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+    # Basic log hygiene so logs don’t grow forever
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
